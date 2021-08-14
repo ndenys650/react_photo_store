@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './App.css';
 import App from './App';
-import {ContextProvider} from './ContextProvider';
+import {ContextProvider} from './Context';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from 'react-router-dom';
 
