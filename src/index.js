@@ -2,13 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './App.css';
 import App from './App';
+import {ContextProvider} from './ContextProvider';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from 'react-router-dom';
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <ContextProvider>
+    <Router>
+      <App />
+    </Router>
+  </ContextProvider>,
   document.getElementById('root')
 );
 
@@ -16,3 +19,4 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+ 
