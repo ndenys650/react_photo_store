@@ -6,6 +6,7 @@ const Context = React.createContext()
 
 function ContextProvider({children}) {
     const [allPhotos, setAllPhotos] = useState([])
+    const [cartItems, setCartItems] = useState([])
 
     const url = "https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json"
 
@@ -16,8 +17,28 @@ function ContextProvider({children}) {
             .then(data => setAllPhotos(data))
     }, [])
 
+    // setting favorite icon highlight within Context
+    function toggleFavorite(id) {
+        const updatedArr = allPhotos.map(photo => {
+            if(photo.id === id) {
+              
+                return {
+                    ...photo,
+                    isFavorite: !photo.isFavorite
+                }
+            }
+            return photo
+        })
+        setAllPhotos(updatedArr)
+    }
+
+    function addToCart(id) {
+        // const updatedArr = cartItems.concat([id])
+        // setCartItems(updatedArr)
+    }
+
     return (
-        <Context.Provider value={{allPhotos}}>
+        <Context.Provider value={{allPhotos, toggleFavorite}}>
             {children}
         </Context.Provider>
     )
