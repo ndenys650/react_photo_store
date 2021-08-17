@@ -39,7 +39,6 @@ function ContextProvider({children}) {
     
     function removeFromCart(id) {
         setCartItems(prevItems => prevItems.filter(item => item.id !== id))
-        console.log(cartItems)
     }
 
     return (
