@@ -1,11 +1,11 @@
 // Image Component  
 import React, {useState, useContext} from 'react';
 import {Context} from '../Context'
-import PropTyoes from 'prop-types';
+import propTyoes from 'prop-types';
 
 function Image({className, img}) {
     const [hovered, setHovered] = useState(false)
-    const {toggleFavorite} = useContext(Context)
+    const {toggleFavorite, addToCart, removeFromCart, cartItems} = useContext(Context)
 
 
     function heartIcon() {
@@ -13,30 +13,37 @@ function Image({className, img}) {
             return <i className="ri-heart-fill favorite"  onClick={() => toggleFavorite(img.id)} />
         } else if(hovered) {
             return <i className="ri-heart-line favorite" onClick={() => toggleFavorite(img.id)} />
+        } 
+    }
+
+    function cartIcon() {
+        const alreadyInCart = cartItems.some(item => item.id === img.id)
+        if(alreadyInCart) {
+            return <i className="ri-shopping-cart-fill cart" onClick={() => removeFromCart(img.id)} />
+        } else if(hovered) {
+            return <i className="ri-add-circle-line cart" onClick={() => addToCart(img)} />
         }
     }
 
-    // const cartIcon = hovered && <i className="ri-add-circle-line favorite"></i>
-
-    return(
-        <div 
+    return( 
+        <div  
             className={`${className} image-container`}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
             <img src={img.url} className="image-grid"/>
             {heartIcon()}
-            {/* {cartIcon} */}
+            {cartIcon()}
         </div>
     )
 }
 
 Image.propTypes = {
-    className: PropTypes.string,
-    img: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired,
-        isFavorite: PropTypes.bool.isRequired
+    className: propTyoes.string,
+    img: propTyoes.shape({
+        id: propTyoes.string.isRequired,
+        url: propTyoes.string.isRequired,
+        isFavorite: propTyoes.bool.isRequired
     })
 }
 

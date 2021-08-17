@@ -32,13 +32,18 @@ function ContextProvider({children}) {
         setAllPhotos(updatedArr)
     }
 
-    function addToCart(id) {
-        // const updatedArr = cartItems.concat([id])
-        // setCartItems(updatedArr)
+    function addToCart(newItem) {
+        setCartItems(prevItems => [...prevItems, newItem])
+        // console.log(newItem)
+    } 
+    
+    function removeFromCart(id) {
+        setCartItems(prevItems => prevItems.filter(item => item.id !== id))
+        console.log(cartItems)
     }
 
     return (
-        <Context.Provider value={{allPhotos, toggleFavorite}}>
+        <Context.Provider value={{allPhotos, toggleFavorite, addToCart, removeFromCart, cartItems}}>
             {children}
         </Context.Provider>
     )
